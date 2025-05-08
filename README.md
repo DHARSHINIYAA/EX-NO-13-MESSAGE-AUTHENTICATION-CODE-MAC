@@ -1,5 +1,5 @@
 # EX-NO-13-MESSAGE-AUTHENTICATION-CODE-MAC
-
+# DHARSHINIYAA KS (212223100004)
 ## AIM:
 To implement MESSAGE AUTHENTICATION CODE(MAC)
 
@@ -26,9 +26,53 @@ To implement MESSAGE AUTHENTICATION CODE(MAC)
 
 ## Program:
 
-
+```
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+void encrypt(char message[], int shift);
+void decrypt(char message[], int shift);
+int main() {
+ char message[100];
+ int shift;
+ printf("********** MAC [ Message Authentication Code ] **********\n\n");
+ printf("Enter a message to encrypt: ");
+ fgets(message, sizeof(message), stdin);
+ printf("Enter the shift value: ");
+ scanf("%d", &shift);
+ encrypt(message, shift);
+ printf("\nEncrypted message: %s\n", message);
+ decrypt(message, shift);
+ printf("Decrypted message: %s\n", message);
+ return 0;
+}
+void encrypt(char message[], int shift) {
+ for (int i = 0; message[i] != '\0'; ++i) {
+ char ch = message[i];
+ if (islower(ch)) {
+ message[i] = ((ch - 'a' + shift) % 26) + 'a';
+ }
+ else if (isupper(ch)) {
+ message[i] = ((ch - 'A' + shift) % 26) + 'A';
+ }
+ }
+}
+void decrypt(char message[], int shift) {
+ for (int i = 0; message[i] != '\0'; ++i) {
+ char ch = message[i];
+ if (islower(ch)) {
+ message[i] = ((ch - 'a' - shift + 26) % 26) + 'a';
+ }
+ else if (isupper(ch)) {
+ message[i] = ((ch - 'A' - shift + 26) % 26) + 'A';
+ }
+ }
+}
+```
 
 ## Output:
+
+![Screenshot 2025-05-08 092546](https://github.com/user-attachments/assets/0fc77866-8c38-4208-a406-c0768fafb0b4)
 
 
 ## Result:
